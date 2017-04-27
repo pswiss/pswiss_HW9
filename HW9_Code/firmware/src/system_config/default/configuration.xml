@@ -8,7 +8,7 @@
     <HarmonyPath path="../../../microchip/harmony/v1_10"/>
     <Processor name=""/>
     <ForceOptimization flag="true"/>
-    <MergeStrategy flag="USER_ALL"/>
+    <MergeStrategy flag="OVERWRITE"/>
   </General>
   <Manifest>
     <Files>
