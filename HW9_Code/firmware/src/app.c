@@ -57,6 +57,14 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include <stdio.h>
 #include <xc.h>
 
+void debugLED(void) {
+    // Configure AN4 as output
+    ANSELA = 0;
+    TRISAbits.TRISA4 = 0;
+    // Turn on the LED
+    LATAbits.LATA4 = 1;
+}
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Global Data Definitions
@@ -354,6 +362,8 @@ void APP_Initialize(void) {
 void APP_Tasks(void) {
     /* Update the application state machine based
      * on the current state */
+    
+    //debugLED();  
 
     switch (appData.state) {
         case APP_STATE_INIT:
@@ -399,11 +409,12 @@ void APP_Tasks(void) {
                 USB_DEVICE_CDC_Read(USB_DEVICE_CDC_INDEX_0,
                         &appData.readTransferHandle, appData.readBuffer,
                         APP_READ_BUFFER_SIZE);
-
+                
                 if (appData.readTransferHandle == USB_DEVICE_CDC_TRANSFER_HANDLE_INVALID) {
                     appData.state = APP_STATE_ERROR;
                     break;
                 }
+                
             }
 
             break;
